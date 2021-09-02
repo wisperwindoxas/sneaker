@@ -28,13 +28,13 @@ function Header(props){
           
           </li>
           <li>
-              <Link to="/favorites" > 
+              <Link to="snaeker/favorites" > 
                 <img src="img/favorite-outline.svg" alt="favorite" />
               </Link>
            
             </li>
           <li>
-           <Link to="/shoping" >
+           <Link to="sneaker/shoping" >
                 <img width="18" height="18" src="img/Union.svg" alt="logo" />
              </Link> 
           </li>

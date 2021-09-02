@@ -41,7 +41,7 @@ function Shop() {
                                       <title>Мои покупки</title>
                               <div className="d-flex justify-between mr-20 favorite">
                              <div className="d-flex align-center ">
-                             <Link to="/">
+                             <Link to="">
                                   <div className="arrow">
                                     <img src="img/arrow.svg" alt="arrow" />
                                   </div>
@@ -77,7 +77,7 @@ function Shop() {
                     <img src="/img/unshoping.png" alt="unFavorite"/>
                     <h2>У вас нет заказов</h2>
                     <p>Вы нищеброд? Оформите хотя бы один заказ.</p>
-                    <Link to="/">
+                    <Link to="">
                         <button  className={"greenBtnPrev"}>
                                 <img src="/img/arrowPrev.svg" alt="arrow" />
                                     Вернуться назад
