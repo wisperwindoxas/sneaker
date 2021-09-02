@@ -1,9 +1,14 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import AppContext from './../context';
 
 
 
 function Header(props){
+
+  const {cardItems} = React.useContext(AppContext)
+
+  const totalPrice = cardItems.reduce((sum, obj) => obj.price + sum, 0);
     return(
         <header className="d-flex justify-between align-center p-40">
             <title>Главный</title>
@@ -17,9 +22,10 @@ function Header(props){
               </div>
           </Link>
         <ul className="d-flex justify-between align-center">
-          <li onClick={props.showCard} className=" cu-p">
+          <li onClick={props.showCard} className=" cu-p"> 
             <img  width="18" height="18" src="/img/cart.svg" alt="logo" />
-            <span>1205 руб.</span>  
+            <span>{totalPrice} руб.</span>  
+          
           </li>
           <li>
               <Link to="/favorites" > 
@@ -28,7 +34,9 @@ function Header(props){
            
             </li>
           <li>
-            <img width="18" height="18" src="/img/Union.svg" alt="logo" />
+           <Link to="/shoping" >
+                <img width="18" height="18" src="/img/Union.svg" alt="logo" />
+             </Link> 
           </li>
         </ul>
       </header>

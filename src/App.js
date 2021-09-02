@@ -1,39 +1,68 @@
 import React, { useState, useEffect } from 'react';
-
+import AppContext from './context';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
+import Shop from './pages/Shop';
+
+
+
 
 function App() {
-  const [show, setShow] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [cardItems, setCardItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+ 
 
   useEffect(() => {
-    axios.get('http://localhost:3004/sneakers').then((res) => setCards(res.data));
-    axios.get('http://localhost:3004/card').then((res) => setCardItems(res.data));
-    axios.get('http://localhost:3004/liked').then((res) => setFavorites(res.data));
+    async function fetchData(){
+
+      const cardResponse = await axios.get('http://localhost:3004/card');
+      const favoriteResponse =  await axios.get('http://localhost:3004/liked');
+      const cardsResponse =  await  axios.get('http://localhost:3004/sneakers');
+
+
+      setIsLoading(false)
+
+      setCardItems(cardResponse.data)
+      setFavorites(favoriteResponse.data)
+      setCards(cardsResponse.data)
+    }
+
+    fetchData()
     
   }, []);
 
   function openCard() {
-    setShow(true);
+    setCartOpen(true);
   }
   function closeCard() {
-    setShow(false);
+    setCartOpen(false);
   }
 
 
 
   const onAddToCart =  (obj) => {
   
-      axios.post('http://localhost:3004/card', obj);
-      setCardItems((prev) => [...prev, obj]);
+    try{
+      if(cardItems.find(item => Number(item.id) === Number(obj.id))){
+        setCardItems((prev) => prev.filter((item) => item.id !== obj.id));
+        axios.delete(`http://localhost:3004/card/${obj.id}`)
+      }else{
+        axios.post('http://localhost:3004/card', obj);
+          setCardItems((prev) => [...prev, obj]);
+      }
+    }catch(e){
+      alert(`Error ${e.message}`)
+    }
     
    
   };
@@ -54,6 +83,8 @@ function App() {
     }
   };
 
+
+
   
   const onRemoveItem = (id) => {
     axios.delete(`http://localhost:3004/card/${id}`);
@@ -62,30 +93,54 @@ function App() {
 
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value);
-    console.log(e.target.value);
   };
+
+  const isItemAdded = (id) =>{
+    return cardItems.some(obj => obj.id === id)
+  }
+
+
+
+
+
 
 
   return (
-    <div className="wrapper clear">
-      
-      {show && <Drawer items={cardItems} onClose={closeCard} onRemove={onRemoveItem} />}
-
-      <Header showCard={openCard} />
-
-      <Route path="/" exact>
-        <Home cards={cards} 
-        searchValue={searchValue} 
-        setSearchValue={setSearchValue}
-        onChangeSearchInput={onChangeSearchInput}
-        onAddToFavorite={onAddToFavorite}
-        onAddToCart={onAddToCart}
+    <AppContext.Provider value={{
+      favorites, 
+      isItemAdded,
+      onAddToFavorite,
+      onAddToCart, 
+      setCartOpen,
+      setCardItems,
+      cardItems, 
+       
+       }}>
+        <div className="wrapper clear">
         
-        />
-      </Route>
+        {<Drawer items={cardItems} onClose={closeCard} onRemove={onRemoveItem} opened={cartOpen} />}
 
-      <Route path="/favorites"><Favorites favorite={favorites} onAddToFavorite={onAddToFavorite} onAddToCart={onAddToCart} /></Route>
-    </div>
+        <Header showCard={openCard} />
+
+        <Route path="/" exact>
+          <Home 
+              cards={cards} 
+              searchValue={searchValue} 
+              setSearchValue={setSearchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              onAddToFavorite={onAddToFavorite}
+              onAddToCart={onAddToCart}
+              cardItems={cardItems}
+              favorites={favorites}
+              isLoading={isLoading}
+          
+          />
+        </Route>
+
+        <Route path="/favorites"><Favorites /></Route>
+        <Route path="/shoping"><Shop /></Route>
+      </div>
+    </AppContext.Provider>
   );
 }
 

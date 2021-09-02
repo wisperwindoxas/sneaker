@@ -39,9 +39,6 @@ body {
   }
 }
 
-
-
-
 .search-block {
   border: 1px solid rgb(182, 182, 182);
   display: flex;
@@ -58,8 +55,7 @@ body {
     width: 200px;
   }
 
-
-  .clear{
+  .clear {
     width: 20px;
     height: 20px;
     position: absolute;
@@ -68,80 +64,91 @@ body {
   }
 }
 
-ul{
+ul {
   width: 200px;
 }
 
-li{
+li {
   cursor: pointer;
   display: flex;
-  justify-content: center;align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
-
-.favorite{
+.favorite {
   display: flex;
-  
+
   align-items: center;
 
-
-  .arrow{
+  .arrow {
     width: 25px;
     height: 25px;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius:5px;
+    border-radius: 5px;
     margin-right: 20px;
     cursor: pointer;
     font-weight: normal;
   }
-
-
- 
 }
 
-.NoFavoriteproduct{
+.NoFavoriteproduct {
   width: 100vw;
   height: 50vh;
 
-.greenBtnPrev{
-  width: 250px;
-  padding: 15px;
-  border: none;
-  background-color:#9DD558;;
-  color: #fff;font-size: 16px;
-  border-radius:20px ;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: relative;
-  transition: background 0.4s ease-in-out;
-  transition: all 0.6s;
-
-  img{
-    
+  .greenBtnPrev {
+    width: 250px;
+    padding: 15px;
+    border: none;
+    background-color: #9dd558;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    transition: background 0.4s ease-in-out;
     transition: all 0.6s;
-  }
 
-
-  &:hover{
-    img{
-      transform: translateX(-10px);
+    img {
       transition: all 0.6s;
+    }
 
+    &:hover {
+      img {
+        transform: translateX(-10px);
+        transition: all 0.6s;
+      }
+    }
+    &:hover {
+      background: lighten(#9dd558, 5%);
+    }
+
+    &:active {
+      background: darken(#9dd558, 10%);
     }
   }
-  &:hover{
-    background: lighten(#9DD558, 5%)
-    
-  }
-
-  &:active{
-    background: darken(#9DD558, 10%)
-  }
-  
 }
+
+.btnClearShop {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  background: linear-gradient(to left, rgb(0, 72, 226), rgb(4, 224, 224));
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
 }
