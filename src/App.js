@@ -25,9 +25,9 @@ function App() {
   useEffect(() => {
     async function fetchData(){
 
-      const cardResponse = await axios.get('http://localhost:3004/card');
-      const favoriteResponse =  await axios.get('http://localhost:3004/liked');
-      const cardsResponse =  await  axios.get('http://localhost:3004/sneakers');
+      const cardResponse = await axios.get('https://6130c2898066ca0017fdaa51.mockapi.io/card');
+      const favoriteResponse =  await axios.get('https://6130c2898066ca0017fdaa51.mockapi.io/liked');
+      const cardsResponse =  await  axios.get('https://6130c2898066ca0017fdaa51.mockapi.io/sneakers');
 
 
       setIsLoading(false)
@@ -55,9 +55,9 @@ function App() {
     try{
       if(cardItems.find(item => Number(item.id) === Number(obj.id))){
         setCardItems((prev) => prev.filter((item) => item.id !== obj.id));
-        axios.delete(`http://localhost:3004/card/${obj.id}`)
+        axios.delete(`https://6130c2898066ca0017fdaa51.mockapi.io/card/${obj.id}`)
       }else{
-        axios.post('http://localhost:3004/card', obj);
+        axios.post('https://6130c2898066ca0017fdaa51.mockapi.io/card', obj);
           setCardItems((prev) => [...prev, obj]);
       }
     }catch(e){
@@ -71,11 +71,11 @@ function App() {
   const onAddToFavorite = async (obj) => {
     try{
       if(favorites.find(favor => favor.id === obj.id)){
-        axios.delete(`http://localhost:3004/liked/${obj.id}`)
+        axios.delete(`https://6130c2898066ca0017fdaa51.mockapi.io/liked/${obj.id}`)
         setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
        
       }else{
-       const {data} = await axios.post('http://localhost:3004/liked', obj);
+       const {data} = await axios.post('https://6130c2898066ca0017fdaa51.mockapi.io/liked', obj);
         setFavorites((prev) => [...prev, data]);
       }
     }catch(error){  
@@ -87,7 +87,7 @@ function App() {
 
   
   const onRemoveItem = (id) => {
-    axios.delete(`http://localhost:3004/card/${id}`);
+    axios.delete(`https://6130c2898066ca0017fdaa51.mockapi.io/card/${id}`);
     setCardItems((prev) => prev.filter((item) => item.id !== id));
   };
 
@@ -122,7 +122,7 @@ function App() {
 
         <Header showCard={openCard} />
 
-        <Route path="/" exact>
+        <Route path="" exact>
           <Home 
               cards={cards} 
               searchValue={searchValue} 
@@ -137,8 +137,8 @@ function App() {
           />
         </Route>
 
-        <Route path="/favorites"><Favorites /></Route>
-        <Route path="/shoping"><Shop /></Route>
+        <Route path="favorites"><Favorites /></Route>
+        <Route path="shoping"><Shop /></Route>
       </div>
     </AppContext.Provider>
   );

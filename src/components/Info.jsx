@@ -12,7 +12,7 @@ export default function Info({title, subtitle, img}) {
                 <h2>{title}</h2>
                 <p className="opacity-6">{subtitle}</p>
                 <button onClick={() => setCartOpen(false)} className={drawer.greenBtnPrev}>
-                <img src="/img/arrowPrev.svg" alt="arrow" />
+                <img src="img/arrowPrev.svg" alt="arrow" />
                     Вернуться назад
                 </button>
         </div>

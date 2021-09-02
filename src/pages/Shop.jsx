@@ -14,7 +14,7 @@ function Shop() {
 
   React.useEffect(() =>{
    (async () =>{
-    const {data} =  await axios.get('http://localhost:3004/orders');
+    const {data} =  await axios.get('https://6130c2898066ca0017fdaa51.mockapi.io/orders');
     setShopingCart(data.reduce((prev, obj)=> [...prev, ...obj.items], []))
    })()
   },[])
@@ -23,7 +23,7 @@ function Shop() {
   const onRemoveShopProduct = () =>{
   
     shopingCart.map((item) => {
-      axios.delete(`http://localhost:3004/orders/${item.id}`)
+      axios.delete(`https://6130c2898066ca0017fdaa51.mockapi.io/orders/${item.id}`)
       return setShopingCart([])
     })
 
@@ -43,13 +43,13 @@ function Shop() {
                              <div className="d-flex align-center ">
                              <Link to="/">
                                   <div className="arrow">
-                                    <img src="/img/arrow.svg" alt="arrow" />
+                                    <img src="img/arrow.svg" alt="arrow" />
                                   </div>
                                 </Link>
                                   <h1>Мои покупки</h1>
                              </div>
                                   <button onClick={onRemoveShopProduct} className="btnClearShop ">
-                                    <img src="/img/delete.png"  alt="trash" />
+                                    <img src="img/delete.png"  alt="trash" />
                                     Clear all product
                                     </button>
                               </div>

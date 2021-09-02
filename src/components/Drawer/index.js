@@ -18,7 +18,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
     try {
       setIsLoading(true);
 
-      const { data } = await axios.post('http://localhost:3004/orders', {
+      const { data } = await axios.post('https://6130c2898066ca0017fdaa51.mockapi.io/orders', {
         items: cardItems,
       });
 
@@ -28,7 +28,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
 
       for (let i = 0; i < cardItems.length; i++) {
         const item = cardItems[i];
-        await axios.delete('http://localhost:3004/card/' + item.id);
+        await axios.delete('https://6130c2898066ca0017fdaa51.mockapi.io/card/' + item.id);
         delay(1000);
       }
     } catch (error) {
@@ -47,7 +47,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
           <img
             onClick={onClose}
             className="remove-btn cu-p"
-            src="/img/btn-remove.svg"
+            src="img/btn-remove.svg"
             alt="removeBtn"
           />
         </h2>
@@ -68,7 +68,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                       <img
                         onClick={() => onRemove(item.id)}
                         className={drawer.remove_btn}
-                        src="/img/btn-remove.svg"
+                        src="img/btn-remove.svg"
                         alt="removeBtn"
                       />
                     </div>
@@ -93,13 +93,13 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
 
               <button disabled={isLoading} onClick={onCLickOreder} className={drawer.greenBtn}>
                 <span>Оформить заказ</span>
-                <img src="/img/btn-arrow.svg" alt="arrow" />
+                <img src="img/btn-arrow.svg" alt="arrow" />
               </button>
             </div>
           </>
         ) : (
           <Info
-            img={isOrderCompleted ? '/img/order.png' : '/img/empty.png'}
+            img={isOrderCompleted ? 'img/order.png' : 'img/empty.png'}
             title={isOrderCompleted ? 'Заказ оформлен!' : 'Корзина пустая'}
             subtitle={
               isOrderCompleted

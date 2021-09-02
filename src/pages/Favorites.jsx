@@ -23,7 +23,7 @@ function Favorites() {
                               <div className="d-flex  mr-20 favorite">
                                 <Link to="/">
                                   <div className="arrow">
-                                    <img src="/img/arrow.svg" alt="arrow" />
+                                    <img src="img/arrow.svg" alt="arrow" />
                                   </div>
                                 </Link>
                               <h1>Мои закладки</h1>
